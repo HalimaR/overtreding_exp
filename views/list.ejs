@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Halima Rahimi</title>
+</head>
+
+<body>
+    <h2>Dit is een lijst van alle overtredingen</h2>
+    <ul class="examen">
+        <% for(var i=0; i < inhaal.length; i++) {%>
+        <li class="examen">
+
+        <span><b>Name : </b><%= inhaal[i].datum_vaststelling %></span><br />
+        <span><b>examen : </b><%= inhaal[i].opnameplaats_straat %></span><br />
+        <span><b>reden : </b><%= inhaal[i].aantal_overtredingen_snelheid %></span>
+        <span><b>reden : </b><%= inhaal[i].aantal_overtredingen_roodlicht %></span><br />
+        </li><br />
+
+        <% } %>
+    </ul>
+    
+    <a href='/overtreding'>overtreding</a><br />
+    <a href='/snelheid'>snelheid</a><br />
+</body>
+
+</html>
