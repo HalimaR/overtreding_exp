@@ -23,10 +23,11 @@ app.get('/', (req, res) => {
     res.redirect('/list')
 })
 app.get('/list', (req, res) => {
-    var sort = { datum_vaststelling: 1 };
-    db.collection('overtredingen').find().sort(sort).toArray((err, result) => {
+    var sort1 = { datum_vaststelling: 1 };
+    var sort2 = { opnameplaats_straat: 1 };
+    db.collection('overtredingen').find().sort(sort1).sort(sort2).toArray((err, result) => {
         if (err) return console.log(err)
-        res.render('list.ejs', { inhaal: result })
+            res.render('list.ejs', { inhaal: result })
     })
 })
 
@@ -47,9 +48,15 @@ app.get('/snelheid', (req, res) => {
 })
 app.post('/search', (req, res) => {
     var query = { int: req.body.int }
+    var lijst = []
     db.collection('overtredingen').find(query).toArray(function (err, result) {
         if (err) return console.log(err)
-        res.render('search_result.ejs', { inhaal: result })
+        foreach(string c in result){
+            if (c.aantal_overtredingen_snelheid >= query){
+                lijst.push(c);
+            }
+        };
+        res.render('search_result.ejs', { inhaal: lijst })
         //console.log(result);
     })
 })
